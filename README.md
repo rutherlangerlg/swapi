@@ -1,1 +1,2 @@
-# swapi
+# SWAPI
+The Star Wars API
