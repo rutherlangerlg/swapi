@@ -13,7 +13,7 @@ class ResourceNotFound extends CustomError {
   }
 }
 class SwapiFailure extends CustomError {
-  constructor (errData) {
+  constructor(errData) {
     super(errData.message)
     this.status = errData.status
   }
