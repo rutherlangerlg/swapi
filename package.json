@@ -1,0 +1,21 @@
+{
+  "name": "swapi",
+  "version": "1.0.0",
+  "author": "Ruth Erlanger",
+  "engines": {
+    "node": "16.14.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha test/**/*.spec.js --reporter spec --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rutherlanger/swapi.git"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "got": "^9.6.0"
+  },
+  "devDependencies": {}
+}
