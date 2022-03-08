@@ -5,7 +5,7 @@ const getBaseUrl = () => {
   return 'https://swapi.dev/api/'
 }
 
-const getSwapiData = async (resource, id) => {
+const getSwapiData = async (endpoint) => {
   const swapiBaseURL = getBaseUrl()
 
   const options = {
@@ -13,11 +13,14 @@ const getSwapiData = async (resource, id) => {
   }
 
   try {
-    const res = await got.get(`${swapiBaseURL}/${resource}/${id}`, options)
-
+    const res = await got.get(`${swapiBaseURL}/${endpoint}`, options)
     return res.body
   } catch (err) {
-    throw new error.ResourceNotFound(resource,id)
+    if (err.statusCode === 404) {
+      throw new error.ResourceNotFound(resource, id)
+    } else {
+      throw new error.SwapiFailure(err)
+    }
   }
 }
 

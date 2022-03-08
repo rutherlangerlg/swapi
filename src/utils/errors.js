@@ -12,7 +12,14 @@ class ResourceNotFound extends CustomError {
     super(` resource: ${resource} with the id: ${id} not found`, 404)
   }
 }
+class SwapiFailure extends CustomError {
+  constructor (errData) {
+    super(errData.message)
+    this.status = errData.status
+  }
+}
 
 module.exports = {
-  ResourceNotFound
+  ResourceNotFound,
+  SwapiFailure
 }

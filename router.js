@@ -4,22 +4,23 @@ const resourceController = require('./src/controllers/resource-controller')
 
 const initRouter = () => {
   const router = express.Router()
-  router.get('/api/:resource/:id', handleRequest('GetResource'))
+  router.get('/api/:resources', handleRequest(resourceController.getResources, 'Get resources'))
+  router.get('/api/:resource/:id', handleRequest(resourceController.getResource, 'Get resource'))
 
   return router
 }
 
-const handleRequest = (requestName) => {
+const handleRequest = (requestHandler, requestName) => {
   return async (req, res) => {
     try {
       console.log(`Starting ${requestName} request`)
-      const result = await resourceController.getResource(req.params)
+      const result = await requestHandler(req.params)
       console.log(`Successfully handled ${requestName} request`)
 
-      res.status(200).send(200, result)
+      res.status(200).send(result)
     } catch (err) {
       console.log(`${requestName} request failed.`, err)
-      res.status(err.status).send(err.status, err.message)
+      res.status(err.status).send(err.message)
     }
   }
 }
